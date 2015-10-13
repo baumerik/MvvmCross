@@ -10,11 +10,18 @@ using System.IO;
 
 namespace Cirrious.MvvmCross.Plugins.File.Wpf
 {
-    public class MvxWpfFileStore : MvxFileStore
+    public class MvxWpfFileStore : MvxIoFileStoreBase
     {
+        private readonly string _rootFolder;
+
+        public MvxWpfFileStore(string rootFolder)
+        {
+            _rootFolder = rootFolder;
+        }
+
         protected override string FullPath(string path)
         {
-            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), path);
+            return Path.Combine(_rootFolder, path);
         }
     }
 }
